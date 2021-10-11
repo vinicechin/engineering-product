@@ -5,10 +5,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.vinicechin.web</groupId>
-    <artifactId>java-web-product</artifactId>
+    <artifactId>engeneering.product</artifactId>
     <packaging>war</packaging>
-    <version>1.0</version>
-    <name>java-web-product Maven Webapp</name>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>engeneering-product</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -74,7 +74,7 @@
 
     </dependencies>
     <build>
-        <finalName>java-web-product</finalName>
+        <!-- <finalName>java-web-product</finalName> -->
         <plugins>
             <!-- http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html -->
             <plugin>
@@ -95,6 +95,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.2.2</version>
+                <configuration>
+                  <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
             </plugin>
 
         </plugins>

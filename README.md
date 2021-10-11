@@ -16,3 +16,15 @@ Access http://localhost:9999
 $ mvn package or mvn war:war
 ```
 A WAR is generated at 'target' folder
+
+### 1.3 Run in a virtual environment :
+```
+$ vagrant up
+
+```
+This will generate the virtual environment
+```
+$ vagrant ssh
+
+```
+Run this to enter the virtual environment
