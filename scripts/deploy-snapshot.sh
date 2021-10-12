@@ -10,11 +10,10 @@ APACHE_WEBAPPS=$APACHE_HOME/webapps
 PRODUCT_SNAPSHOT_NAME=engeneering.product-0.0.1-SNAPSHOT.war
 RESOURCE_NAME=engeneering-product.war
 
-
 # Shutdown Tomcat
 sh $APACHE_BIN/shutdown.sh
 
-
+sudo chown tomcat:tomcat -R /opt/tomcat
 # Deploy generated SNAPSHOT into the dev-env  
 cp /vagrant_target/$PRODUCT_SNAPSHOT_NAME $APACHE_WEBAPPS
 cd $APACHE_WEBAPPS

@@ -42,7 +42,7 @@ public class TestWelcome {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"))
-                .andExpect(forwardedUrl("/WEB-INF/views/index.jsp"))
+                .andExpect(forwardedUrl("index.jsp"))
                 .andExpect(model().attribute("msg", "Hello World from Vinicius Amaro Cechin"));
 
     }
