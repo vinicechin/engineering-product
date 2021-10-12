@@ -17,7 +17,7 @@ $ mvn package or mvn war:war
 ```
 A WAR is generated at 'target' folder
 
-### 1.3 Run in a virtual environment :
+### 1.3 Start a virtual environment :
 ```
 $ vagrant up
 
@@ -28,3 +28,19 @@ $ vagrant ssh
 
 ```
 Run this to enter the virtual environment
+
+### 1.4 Open in a virtual environment :
+```
+$ cd /vagrant_scripts/
+
+```
+Inside the virtual environment go to vagrant_scripts folder
+```
+$ sudo ./deploy-snapshot.sh
+
+```
+Deploy the application with tomcat
+
+### 1.5 Visualize the application :
+Access http://192.168.33.14:8080/engeneering-product/
+
