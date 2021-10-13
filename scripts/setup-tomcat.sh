@@ -9,13 +9,13 @@ sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
 echo "Download Tomcat"
 cd /home/vagrant
 sudo apt-get -y install curl
-curl -o apache-tomcat-10.0.12.tar.gz https://downloads.apache.org/tomcat/tomcat-10/v10.0.12/bin/apache-tomcat-10.0.12.tar.gz
+curl -o apache-tomcat-9.0.54.tar.gz https://downloads.apache.org/tomcat/tomcat-9/v9.0.54/bin//apache-tomcat-9.0.54.tar.gz
  
 # Extract into target directory
 echo "Extract into target directory"
 sudo mkdir /opt/tomcat
-sudo tar -xzvf apache-tomcat-10*tar.gz -C /opt/tomcat --strip-components=1
-sudo rm apache-tomcat-10*tar.gz
+sudo tar -xzvf apache-tomcat-9*tar.gz -C /opt/tomcat --strip-components=1
+sudo rm apache-tomcat-9*tar.gz
  
  
 # Assign ownership over target directory

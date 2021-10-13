@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/xenial64"
-  config.vm.hostname = "dev-env-engeneering-product"
+  config.vm.hostname = "dev-env-helloworld"
   
   ENV['LC_ALL']="en_US.UTF-8"
 
@@ -81,11 +81,6 @@ Vagrant.configure("2") do |config|
      sudo apt install default-jre -y
      sudo apt-get install openjdk-8-jdk -y
      
-     # echo "Install MySql server"
-     # export DEBIAN_FRONTEND="noninteractive"
-     # sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password 12345678"
-     # sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password 12345678"
-     # sudo apt-get install -y mysql-server
      SHELL
 
   
