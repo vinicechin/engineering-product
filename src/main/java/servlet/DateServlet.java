@@ -29,18 +29,21 @@ public class DateServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    protected String getDate() {
+    	// Date date = new Date();
+		String pattern = "MM-dd-yyyy";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+		return simpleDateFormat.format(new Date());
+    }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 
-		// Date date = new Date();
-		String pattern = "MM-dd-yyyy";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		String date = simpleDateFormat.format(new Date());
-
-		out.println(HTML_START + "<h2 id='introduction' >This is a date servlet!</h2><br/><h3 id='date' >Today is "+ date +"</h3>"+HTML_END);
+		out.println(HTML_START + "<h2 id='introduction' >This is a date servlet!</h2><br/><h3 id='date' >Today is "+ getDate() +"</h3>"+HTML_END);
 	}
 
 	/**
