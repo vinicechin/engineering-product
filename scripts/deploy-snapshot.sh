@@ -10,6 +10,10 @@ APACHE_WEBAPPS=$APACHE_HOME/webapps
 PRODUCT_SNAPSHOT_NAME=engineering.product-0.0.1-SNAPSHOT.war
 RESOURCE_NAME=engineering.war
 
+# Give permission to enter tomcat folder
+sudo chmod 777 -R /opt/tomcat
+
+
 # Shutdown Tomcat
 sh $APACHE_BIN/shutdown.sh
 
