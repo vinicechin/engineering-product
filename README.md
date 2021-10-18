@@ -5,16 +5,18 @@ Using Maven 3, Spring 5 MVC, JUnit 5, Logback and Jetty web server
 ## 1. How to run this project?
 
 ### 1.1 Create a WAR file for deployment :
+
+From the main folder, generate the war file at 'target' folder
 ```
+$ cd product/
 $ mvn clean install
 ```
-A WAR is generated at 'target' folder
 
 ### 1.2 Start a virtual environment :
-Generate the virtual environment
+From the main folder, generate the virtual environment for production
 ```
+$ cd production_env
 $ vagrant up
-
 ```
 
 Enter the virtual environment
