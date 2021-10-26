@@ -1,0 +1,127 @@
+---
+
+- name: "Create Downloads folder"
+  file:
+    path: "{{ destination }}"
+    state: directory
+
+- name: "Update repositories cache." 
+  apt:
+    update_cache: yes
+
+
+- name: "Safe system upgrade via aptitude."
+  apt: 
+    upgrade: safe        
+
+
+- name: "Check if GitLab configuration file already exists."
+  stat: path=/etc/gitlab/gitlab.rb
+  register: gitlab_config_file
+
+
+- name: "Check if GitLab is already installed."
+  stat: path=/usr/bin/gitlab-ctl
+  register: gitlab_file
+
+
+- name: "Install GitLab dependencies."
+  package: name={{ item }} state=present
+  with_items:
+    - openssh-server
+    - ca-certificates
+    - curl
+    - openssl
+    - tzdata
+
+    
+- name: "Download GitLab repository installation script."
+  get_url:
+    url: "{{ gitlab_repository_installation_script_url }}"
+    dest: /tmp/gitlab_install_repository.sh
+    validate_certs: "{{ gitlab_download_validate_certs }}"
+  when: not gitlab_file.stat.exists
+  
+
+- name: "Install GitLab repository."
+  command: bash /tmp/gitlab_install_repository.sh
+  when: not gitlab_file.stat.exists
+  
+
+- name: "Define the Gitlab package name."
+  set_fact:
+    gitlab_package_name: "{{ gitlab_edition }}{{ gitlab_package_version_separator }}{{ gitlab_version }}"
+  when: gitlab_version != ''
+
+
+- name: "Install GitLab"
+  package:
+    name: "{{ gitlab_package_name | default(gitlab_edition) }}"
+    state: present
+  when: not gitlab_file.stat.exists
+
+
+- name: "Give permissions to modify /etc/gitlab/ folder"
+  command: chmod 777 -R /etc/gitlab/
+
+
+- name: "Copy Gitlab config file"
+  template:
+    src: "gitlab.rb"
+    dest: /etc/gitlab/gitlab.rb
+    owner: vagrant
+    mode: 0600
+
+- name: "Get gitlab-runner installer"
+  shell: curl -L {{ gitlab_runner_url }} | sudo bash
+  args:
+    executable: /bin/bash
+    warn: False
+
+
+- name: "Install Gitlab-Runner"
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - gitlab-runner
+
+
+- name: "Reconfig and restart gitlab"
+  command: gitlab-ctl reconfigure && gitlab-ctl restart unicorn && gitlab-ctl gitlab_repository_installation_script_url
+
+
+- name: "Extract Runner Registration Token from gitlab-rails"
+  become: true
+  shell: |
+    echo "Gitlab::CurrentSettings.current_application_settings.runners_registration_token" |
+    gitlab-rails console --environment=production
+  register: gitlab_runner_registration_token_result
+
+- name: "Parse token from response"
+  set_fact:
+    gitlab_runner_registration_token: "{{ gitlab_runner_registration_token_result.stdout | regex_search(regexp, '\\1') | list | first }}"
+  vars:
+    regexp: 'runners_registration_token\n\"([^\"]+)'
+
+- name: "And the Token is..."
+  debug:
+    msg: "{{ gitlab_runner_registration_token }}"
+
+- name: "Unregister all previously used runners"
+  shell: "gitlab-runner unregister --all-runners"
+
+- name: "Register Gitlab runner"
+  command: gitlab-runner register \
+    --url {{ gitlab_internal_url }} \
+    --registration-token {{ gitlab_runner_registration_token }} \
+    --executor docker --docker-image alpine:latest \
+    --description "docker" \
+    --tag-list "integration" \
+    --run-untagged="true" \
+    --non-interactive
+  
+
+- name: "Restart Gitlab runner"
+  command: gitlab-runner restart
+

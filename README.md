@@ -41,3 +41,7 @@ $ sudo ./deploy-snapshot.sh
 ### 1.4 Visualize the application :
 Access http://192.168.33.14:8080/engineering/
 
+## 2. How to create an integration server for this project?
+
+Follow the tutorial in [integration_server](https://github.com/vinicechin/engineering-product/tree/master/integration_server)
+
