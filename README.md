@@ -22,29 +22,6 @@
 	- scripts folder with files to run shell commands inside the VM
 	- gitlab-runner running into the VM
 
-- /<root_folder>
-		|-- /product
-		|	   |-- /product
-		|	   |-- /acceptance_tests
-		|	   |-- gitlab-ci.yml
-		|      |-- initial_commit.sh
-		|
-		|-- /integration_server
-		|	   |-- Vagrantfile
-		|	   |-- /playbook
-		|	   |-- /data
-		|
-		|-- /staging_env
-		|	   |-- Vagrantfile
-		|	   |-- /scripts
-		|
-		|-- /production_env
-		|	   |-- Vagrantfile
-		|	   |-- /scripts
-		|
-		|-- readme.txt
-		|-- scenarios.txt
-
 
 ## Prerequisites
 
