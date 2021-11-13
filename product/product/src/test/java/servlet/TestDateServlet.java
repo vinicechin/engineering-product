@@ -11,8 +11,8 @@ import java.text.SimpleDateFormat;
 class TestDateServlet {
  
     @Test
-    public void testAbc() {
-        assertEquals(2, 1 + 1);
+    public void testDateServlet() {
+        assertEquals(DateServlet.PATTERN, "MM-dd-yyyy");
     }
 
     @Test

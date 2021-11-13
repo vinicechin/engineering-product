@@ -20,6 +20,7 @@ public class DateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String HTML_START="<html><body>";
 	public static final String HTML_END="</body></html>";
+	public static final String PATTERN="MM-dd-yyyy";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,8 +32,7 @@ public class DateServlet extends HttpServlet {
 
     protected String getDate() {
     	// Date date = new Date();
-		String pattern = "MM-dd-yyyy";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(PATTERN);
 
 		return simpleDateFormat.format(new Date());
     }

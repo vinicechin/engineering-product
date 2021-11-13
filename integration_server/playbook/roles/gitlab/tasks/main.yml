@@ -91,6 +91,13 @@
   command: gitlab-ctl reconfigure && gitlab-ctl restart unicorn && gitlab-ctl gitlab_repository_installation_script_url
 
 
+- name: "Set root password"
+  command: gitlab-rails runner /vagrant_data/gitlab-set-root-password.rb
+
+- name: "Create a second user"
+  command: gitlab-rails runner /vagrant_data/gitlab-create-user.rb
+
+
 - name: "Extract Runner Registration Token from gitlab-rails"
   become: true
   shell: |

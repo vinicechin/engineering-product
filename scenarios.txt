@@ -1,0 +1,107 @@
+# Scenario 1
+
+## Goal
+The pipeline fails in release stage.
+
+
+## Pre-conditions
+- The pipeline was set correctly and every stage is passing
+
+  
+## Main Success Scenario
+1. Go to production_env folder: cd ~/<root_folder>/production_env
+2. Suspend production vagrant machine: vagrant suspend
+3. In EngineeringProduct project, under "CI/CD", rerun the pipeline for the product
+
+
+## Notes
+- None.
+
+
+# Scenario 2
+
+## Goal
+The pipeline fails in test stage.
+
+
+## Pre-conditions
+- The pipeline was set correctly and every stage until test is passing
+
+  
+## Main Success Scenario
+1. Open TestPage.java file in any editor: ~/<root_folder>/product/acceptance_tests/src/test/java/testNG/TestPage.java
+2. Change line 23:
+	private static String webpageURI= "/product";
+   For:
+   	private static String webpageURI= "/error";
+3. Save, commit and push the modification to gitlab.
+4. In EngineeringProduct project, under "CI/CD", rerun the pipeline for the product
+
+
+## Notes
+- None.
+
+
+# Scenario 3
+
+## Goal
+The pipeline fails in deploy stage.
+
+
+## Pre-conditions
+- The pipeline was set correctly and every stage until deploy is passing
+
+  
+## Main Success Scenario
+1. Go to staging_env folder: cd ~/<root_folder>/staging_env
+2. Suspend production vagrant machine: vagrant suspend
+3. In EngineeringProduct project, under "CI/CD", rerun the pipeline for the product
+
+
+## Notes
+- None.
+
+
+# Scenario 4
+
+## Goal
+The pipeline fails in build stage because of tests failing.
+
+
+## Pre-conditions
+- The pipeline was set correctly and every stage until build is passing
+
+  
+## Main Success Scenario
+1. Open TestPage.java file in any editor: ~/<root_folder>/product/product/src/test/java/servlet/TestDateServlet.java
+2. Change line 20:
+	String pattern = "MM-dd-yyyy";
+   For:
+   	String pattern = "dd-MM-yyyy";
+3. Save, commit and push the modification to gitlab.
+4. In EngineeringProduct project, under "CI/CD", rerun the pipeline for the product
+
+
+## Notes
+- None.
+
+
+# Scenario 5
+
+## Goal
+The pipeline fails in build stage because of wrong code.
+
+
+## Pre-conditions
+- The pipeline was set correctly
+
+  
+## Main Success Scenario
+1. Open TestPage.java file in any editor: ~/<root_folder>/product/product/src/main/java/servlet/DateServlet.java
+2. Remove the final ";" from any line of the code.
+3. Save, commit and push the modification to gitlab.
+4. In EngineeringProduct project, under "CI/CD", rerun the pipeline for the product
+
+
+## Notes
+- None.
